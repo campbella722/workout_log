@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Sitebar from "./home/Navbar";
 import Auth from "./auth/Auth";
-import Headers from "./middleware/Headers";
+// import Headers from "./middleware/Headers";
 
-app.use(cors())
-const cors = require('cors')
+// app.use(cors())
+// const cors = require('cors')
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div >
-      <Headers />
+      {/* <Headers /> */}
       <Sitebar clickLogout={clearToken}/>
       <Auth updateToken={updateToken}/>
     </div>
