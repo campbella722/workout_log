@@ -2,6 +2,18 @@ import React from 'react';
 import { Table, Button } from 'reactstrap';
 
 const WorkoutTable = (props) => {
+
+    const deleteWorkout = (workout) => {
+        fetch(`http://localhost:3000/log/${workout.id}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': props.token
+            })
+        })
+        .then(() => props.fetchWorkouts())
+    }
+
     const workoutMapper = () => {
         return props.workouts.map((workout, index) => {
             return(
@@ -12,7 +24,7 @@ const WorkoutTable = (props) => {
                     <td>{workout.definition}</td>
                     <td>
                         <Button color="warning">Update</Button>
-                        <Button color="danger">Delete</Button>
+                        <Button color="danger" onClick={() => {deleteWorkout(workout)}}>Delete</Button>
                     </td>
                 </tr>
             )
@@ -20,7 +32,7 @@ const WorkoutTable = (props) => {
     }
     return(
         <>
-        <h3></h3>
+        <h3>Workout History</h3>
         <hr/>
         <Table striped>
             <thead>
@@ -31,9 +43,6 @@ const WorkoutTable = (props) => {
                     <th>Definition</th>
                 </tr>
             </thead>
-            <tbody>
-
-            </tbody>
         </Table>
         </>
     )

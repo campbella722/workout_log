@@ -5,10 +5,11 @@ import WorkoutTable from './WorkoutTable';
 
 const WorkoutIndex = (props) => {
     const [workouts, setWorkouts] = useState([]);
+
     const fetchWorkouts = () => {
-        fetch('https://localhost:3000/log', {
+        fetch('http://localhost:3000/log', {
             method: 'GET',
-            headers: new Headers ({
+            headers: new Headers({
                 'Content-Type': 'application/json',
                 'Authorization': props.token
             })
@@ -21,17 +22,20 @@ const WorkoutIndex = (props) => {
     useEffect(() => {
         fetchWorkouts();
     }, [])
+    
     return(
-        <Container>
-            <Row>
-                <Col md="3">
-                    <WorkoutCreate fetchWorkouts={fetchWorkouts} token={props.token}/>
-                </Col>
-                <Col md="9">
-                    <WorkoutTable workouts={workouts} fetchWorkouts={fetchWorkouts} token={props.token}/>
-                </Col>
-            </Row>
-        </Container>
+        <div>
+            <Container>
+                <Row>
+                    <Col md="3">
+                        <WorkoutCreate fetchWorkouts={fetchWorkouts} token={props.token}/>
+                    </Col>
+                    <Col md="9">
+                        <WorkoutTable workouts={workouts} fetchWorkout={fetchWorkouts} token={props.token}/>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     )
 }
 
