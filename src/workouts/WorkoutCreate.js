@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import WorkoutIndex from './WorkoutIndex';
+// import WorkoutIndex from './WorkoutIndex';
 
 const WorkoutCreate = (props) => {
     const [description, setDescription] = useState('');
@@ -14,7 +14,8 @@ const WorkoutCreate = (props) => {
             body: JSON.stringify({log: {description: description, definition: definition, result: result}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': props.token
+                'Authorization': `Bearer ${props.token}`
+
             })
         }).then((res) => res.json())
         .then((logData) => {
@@ -37,9 +38,9 @@ const WorkoutCreate = (props) => {
             <FormGroup>
                 <Label htmlFor="definition"/>
                 <Input type="select" name="definition" value={definition} onChange={(e) => setDefinition(e.target.value)}>
-                    <option value="Time"></option>
-                    <option value="Weight"></option>
-                    <option value="Distance"></option>
+                    <option value="Time">Time</option>
+                    <option value="Weight">Weight</option>
+                    <option value="Distance">Distance</option>
                 </Input>
             </FormGroup>
             <FormGroup>
